@@ -2,78 +2,147 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Arta Hosting</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-image: url('https://wallpapercave.com/wp/wp2757544.jpg');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-shadow: 1px 1px 3px #000;
-    }
-    .container {
-      background-color: rgba(0, 0, 0, 0.7);
-      margin: 2rem auto;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 850px;
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    .produk {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    .produk h3 {
+      background-color: #f2f2f2;
+      padding: 20px;
       margin: 0;
     }
-    .tombol, .tombol-formulir {
-      display: inline-block;
-      background-color: #ffcc00;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      margin-top: 10px;
-      font-weight: bold;
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .tombol-formulir {
-      display: block;
+
+    h1 {
       text-align: center;
-      margin: 30px auto 0;
-      width: fit-content;
+    }
+
+    .product {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    form {
+      margin-top: 30px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .payment {
+      margin-top: 25px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #777;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Arta Hosting</h1>
-    <h2>Panel Hosting Murah & Terpercaya</h2>
 
-    <div class="produk"><h3>RESELLER PANEL</h3><p>Rp 5.000</p><a class="tombol" href="https://wa.me/6285837030096">ASSALAMUALAIKUM KAK MAU ORDER</a></div>
-    <div class="produk"><h3>ADMIN PANEL</h3><p>Rp 10.000</p><a class="tombol" href="https://wa.me/6285837030096">ASSALAMUALAIKUM KAK MAU ORDER</a></div>
-    <div class="produk"><h3>PANEL 5GB</h3><p>Rp 5.000</p><a class="tombol" href="https://wa.me/6285837030096">ASSALAMUALAIKUM KAK MAU ORDER</a></div>
-    <div class="produk"><h3>PANEL 6GB</h3><p>Rp 6.000</p><a class="tombol" href="https://wa.me/6285837030096">ASSALAMUALAIKUM KAK MAU ORDER</a></div>
-    <div class="produk"><h3>PANEL 7GB</h3><p>Rp 7.000</p><a class="tombol" href="https://wa.me/6285837030096">ASSALAMUALAIKUM KAK MAU ORDER</a></div>
-    <div class="produk"><h3>PANEL UNLI</h3><p>Rp 8.000</p><a class="tombol" href="https://wa.me/6285837030096">ASSALAMUALAIKUM KAK MAU ORDER</a></div>
-    <div class="produk"><h3>MURID NOKOS</h3><p>Rp 2.000</p><a class="tombol" href="https://wa.me/6285837030096">ASSALAMUALAIKUM KAK MAU ORDER</a></div>
-    <div class="produk"><h3>MURID SUNTIK SOSMED</h3><p>Rp 5.000</p><a class="tombol" href="https://wa.me/6285837030096">ASSALAMUALAIKUM KAK MAU ORDER</a></div>
+    <div class="product"><span>RESELLER PANEL</span><span>Rp5.000</span></div>
+    <div class="product"><span>ADMIN PANEL</span><span>Rp10.000</span></div>
+    <div class="product"><span>PANEL 5GB</span><span>Rp5.000</span></div>
+    <div class="product"><span>PANEL 6GB</span><span>Rp6.000</span></div>
+    <div class="product"><span>PANEL 7GB</span><span>Rp7.000</span></div>
+    <div class="product"><span>PANEL UNLI</span><span>Rp8.000</span></div>
+    <div class="product"><span>MURID NOKOS</span><span>Rp2.000</span></div>
+    <div class="product"><span>MURID SUNTIK SOSMED</span><span>Rp5.000</span></div>
 
-    <h2>Pembayaran</h2>
-    <p>DANA: <strong>082181816107</strong></p>
-    <p>QRIS: <strong>Minta ke admin</strong></p>
+    <form onsubmit="return kirimWA(event)">
+      <h3>Formulir Konfirmasi Pembayaran</h3>
 
-    <p style="text-align:center; margin-top: 2rem;">Nomor WA untuk kirim formulir: <strong>085837030096</strong></p>
+      <label for="produk">Produk</label>
+      <select id="produk" required>
+        <option value="">-- Pilih Produk --</option>
+        <option value="RESELLER PANEL">RESELLER PANEL</option>
+        <option value="ADMIN PANEL">ADMIN PANEL</option>
+        <option value="PANEL 5GB">PANEL 5GB</option>
+        <option value="PANEL 6GB">PANEL 6GB</option>
+        <option value="PANEL 7GB">PANEL 7GB</option>
+        <option value="PANEL UNLI">PANEL UNLI</option>
+        <option value="MURID NOKOS">MURID NOKOS</option>
+        <option value="MURID SUNTIK SOSMED">MURID SUNTIK SOSMED</option>
+      </select>
 
-    <a class="tombol-formulir" href="https://wa.me/6285837030096?text=HAI%20SAYA%20TELAH%20MELAKUKAN%20PEMBAYARAN%0A%0APRODUK%3A%20%0AHARGA%3A%20%0AUSERNAME%3A%20%0AMETODE%20PEMBAYARAN%3A%20%0ABUKTI%20PEMBAYARAN%3A%20%0A%0ATERIMA%20KASIH%21">
-      KIRIM FORMULIR VIA WHATSAPP
-    </a>
+      <label for="harga">Harga</label>
+      <input type="text" id="harga" placeholder="Contoh: 5.000" required />
+
+      <label for="pembayaran">Metode Pembayaran</label>
+      <select id="pembayaran" required>
+        <option value="">-- Pilih Pembayaran --</option>
+        <option value="DANA">DANA</option>
+        <option value="QRIS">QRIS</option>
+      </select>
+
+      <button type="submit">Kirim ke WhatsApp Admin</button>
+    </form>
+
+    <div class="payment">
+      <h3>Info Pembayaran:</h3>
+      <p><strong>DANA:</strong> 082181816107</p>
+      <p><strong>QRIS:</strong> Minta Admin</p>
+    </div>
+
+    <footer>&copy; 2025 Arta Hosting</footer>
   </div>
+
+  <script>
+    function kirimWA(event) {
+      event.preventDefault();
+      const produk = document.getElementById('produk').value;
+      const harga = document.getElementById('harga').value;
+      const pembayaran = document.getElementById('pembayaran').value;
+
+      const pesan = `HAI KAK ARTA SAYA TELAH MELAKUKAN PEMBAYARAN\n\nPRODUK: ${produk}\nHARGA: ${harga}\nPAYMENT: ${pembayaran}\n\nDAN INI BUKTI TRANSFER NYA\n(Upload bukti transfer Kak)`;
+
+      const noWA = '6285837030096'; // No admin
+      const url = `https://wa.me/${noWA}?text=${encodeURIComponent(pesan)}`;
+      window.open(url, '_blank');
+      return false;
+    }
+  </script>
 </body>
-</html>
+  </html>
+                                                     
