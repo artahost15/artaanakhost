@@ -1,73 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>SC Bot Viewer</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArtaGames - Top Up Game</title>
   <style>
-    body { background: #1e1e1e; color: white; font-family: monospace; padding: 20px; }
-    select, button { padding: 10px; margin: 10px 5px 10px 0; font-size: 16px; }
-    #editor { border: 1px solid #555; height: 500px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #27ae60;
+      color: white;
+      padding: 12px;
+      border: none;
+      margin-top: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #219150;
+    }
+    .qris {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .qris img {
+      width: 100%;
+      max-width: 300px;
+      border: 2px solid #333;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
 
-<h2>SC Bot Viewer</h2>
-<select id="scriptSelect" onchange="loadScript()">
-  <option value="0">MARCVALKYRION/index.js</option>
-  <option value="1">SC_CPANEL/config.js</option>
-  <option value="2">Simple-Botz-V5/handler.js</option>
-  <option value="3">Zombie-Crash/main.js</option>
-  <option value="4">Simple-Botz-V5/data.json</option>
-</select>
-<button onclick="copyScript()">📋 Copy</button>
-<button onclick="downloadScript()">⬇️ Download</button>
+<header>
+  <h1>ArtaGames</h1>
+  <p>Top Up Game Termurah & Terpercaya</p>
+</header>
 
-<div id="editor"></div>
+<div class="container">
+  <h2>Formulir Pemesanan</h2>
+  <form action="https://api.whatsapp.com/send?phone=62858370220018" method="get" target="_blank">
+    <label>Nama Game:</label>
+    <select name="game">
+      <option value="Mobile Legends">Mobile Legends</option>
+      <option value="Free Fire">Free Fire</option>
+      <option value="PUBG Mobile">PUBG Mobile</option>
+      <option value="Higgs Domino">Higgs Domino</option>
+      <option value="Genshin Impact">Genshin Impact</option>
+    </select>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
-<script>
-  const scripts = [
-    `// Ini isi index.js dari MARCVALKYRION`,
-    `const config = {{ key: 'value' }};`,
-    `function startBot() {{ console.log('Bot running'); }}`,
-    `// Crash handling script`,
-    `{{ "users": [] }}`
-  ];
+    <label>ID Game:</label>
+    <input type="text" name="id" placeholder="Contoh: 12345678 (1234)" required>
 
-  const editor = CodeMirror(document.getElementById("editor"), {
-    value: scripts[0],
-    mode: "javascript",
-    lineNumbers: true,
-    theme: "default"
-  });
+    <label>Pilih Nominal:</label>
+    <select name="nominal">
+      <option value="86 Diamond - Rp15.000">86 Diamond - Rp15.000</option>
+      <option value="172 Diamond - Rp30.000">172 Diamond - Rp30.000</option>
+      <option value="257 Diamond - Rp45.000">257 Diamond - Rp45.000</option>
+      <option value="344 Diamond - Rp60.000">344 Diamond - Rp60.000</option>
+    </select>
 
-  function loadScript() {
-    const index = document.getElementById("scriptSelect").value;
-    editor.setValue(scripts[index]);
-  }
+    <label>Nama Kamu:</label>
+    <input type="text" name="nama" placeholder="Masukkan nama kamu" required>
 
-  function copyScript() {
-    const temp = document.createElement("textarea");
-    temp.value = editor.getValue();
-    document.body.appendChild(temp);
-    temp.select();
-    document.execCommand("copy");
-    document.body.removeChild(temp);
-    alert("✅ Script disalin!");
-  }
+    <label>Upload Bukti Transfer:</label>
+    <input type="file" required>
 
-  function downloadScript() {
-    const content = editor.getValue();
-    const element = document.createElement("a");
-    element.setAttribute("href", "data:text/javascript;charset=utf-8," + encodeURIComponent(content));
-    element.setAttribute("download", "script.js");
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-  }
-</script>
+    <button type="submit">Kirim Pesanan via WhatsApp</button>
+  </form>
+
+  <div class="qris">
+    <h3>Bayar via QRIS:</h3>
+    <img src="qris-arta-store.png" alt="QRIS Arta Store">
+    <p><strong>DANA / OVO / GoPay</strong> ke 082181816107</p>
+  </div>
+</div>
+
 </body>
 </html>
-
