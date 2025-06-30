@@ -1,106 +1,94 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ArtaGames - Top Up Game</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BADAG WA</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
     }
-    header {
-      background: #2c3e50;
+    body {
+      height: 100vh;
+      background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: white;
-      padding: 15px;
       text-align: center;
     }
     .container {
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #ccc;
+      padding: 40px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00ffcc;
+      animation: glow 3s infinite ease-in-out;
     }
-    input, select, textarea {
-      width: 100%;
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px #00ffcc; }
+      50% { box-shadow: 0 0 40px #00ffcc; }
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+    input {
       padding: 10px;
-      margin-top: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      width: 80%;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 20px;
+      font-size: 1em;
     }
     button {
-      background: #27ae60;
-      color: white;
-      padding: 12px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background: #00ffcc;
       border: none;
-      margin-top: 15px;
-      border-radius: 5px;
+      border-radius: 50px;
+      color: #000;
       cursor: pointer;
+      transition: transform 0.2s;
     }
     button:hover {
-      background: #219150;
+      transform: scale(1.05);
+      background: #00e6b8;
     }
-    .qris {
-      text-align: center;
+    #status {
       margin-top: 20px;
-    }
-    .qris img {
-      width: 100%;
-      max-width: 300px;
-      border: 2px solid #333;
-      border-radius: 10px;
+      font-size: 1.2em;
+      color: #00ffcc;
+      text-shadow: 0 0 5px #00ffcc;
+      display: none;
     }
   </style>
 </head>
 <body>
-
-<header>
-  <h1>ArtaGames</h1>
-  <p>Top Up Game Termurah & Terpercaya</p>
-</header>
-
-<div class="container">
-  <h2>Formulir Pemesanan</h2>
-  <form action="https://api.whatsapp.com/send?phone=62858370220018" method="get" target="_blank">
-    <label>Nama Game:</label>
-    <select name="game">
-      <option value="Mobile Legends">Mobile Legends</option>
-      <option value="Free Fire">Free Fire</option>
-      <option value="PUBG Mobile">PUBG Mobile</option>
-      <option value="Higgs Domino">Higgs Domino</option>
-      <option value="Genshin Impact">Genshin Impact</option>
-    </select>
-
-    <label>ID Game:</label>
-    <input type="text" name="id" placeholder="Contoh: 12345678 (1234)" required>
-
-    <label>Pilih Nominal:</label>
-    <select name="nominal">
-      <option value="86 Diamond - Rp15.000">86 Diamond - Rp15.000</option>
-      <option value="172 Diamond - Rp30.000">172 Diamond - Rp30.000</option>
-      <option value="257 Diamond - Rp45.000">257 Diamond - Rp45.000</option>
-      <option value="344 Diamond - Rp60.000">344 Diamond - Rp60.000</option>
-    </select>
-
-    <label>Nama Kamu:</label>
-    <input type="text" name="nama" placeholder="Masukkan nama kamu" required>
-
-    <label>Upload Bukti Transfer:</label>
-    <input type="file" required>
-
-    <button type="submit">Kirim Pesanan via WhatsApp</button>
-  </form>
-
-  <div class="qris">
-    <h3>Bayar via QRIS:</h3>
-    <img src="qris-arta-store.png" alt="QRIS Arta Store">
-    <p><strong>DANA / OVO / GoPay</strong> ke 082181816107</p>
+  <div class="container">
+    <h1>BADAG WA</h1>
+    <p>Masukkan nomor WA yang ingin dibadakin:</p>
+    <input type="text" id="nomor" placeholder="Contoh: 6281234567890" />
+    <br />
+    <button onclick="badakWA()">🐘 BADAK WA</button>
+    <div id="status"></div>
   </div>
-</div>
 
+  <script>
+    function badakWA() {
+      const nomor = document.getElementById('nomor').value.trim();
+      const status = document.getElementById('status');
+      if (nomor === '') {
+        status.innerText = '⚠️ Nomor tidak boleh kosong!';
+        status.style.display = 'block';
+        return;
+      }
+      status.innerText = `✅ Sukses badakin WA ${nomor} ✅`;
+      status.style.display = 'block';
+    }
+  </script>
 </body>
 </html>
