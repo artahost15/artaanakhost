@@ -1,151 +1,98 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>APK BUG BY GYZEN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Bug Login</title>
   <style>
     body {
+      background-color: #111;
+      color: white;
       font-family: Arial, sans-serif;
-      background: url('https://files.catbox.moe/mp9vqc.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
       text-align: center;
-      padding: 60px 20px;
+      padding: 20px;
     }
-
-    h1 {
-      font-size: 80px;
-      font-weight: bold;
-      margin-bottom: 80px;
-      text-shadow: 4px 4px 12px #000;
-    }
-
-    input[type="text"], input[type="password"] {
-      padding: 25px;
-      font-size: 40px;
-      width: 95%;
-      max-width: 700px;
+    .box {
+      background-color: #222;
       border-radius: 15px;
-      border: none;
-      margin-bottom: 40px;
-      text-align: center;
-      box-shadow: 0 0 15px #000;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px #00ffcc;
     }
-
-    .button-group button, .login-box button {
-      margin: 25px;
-      padding: 25px 60px;
-      font-size: 45px;
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px auto;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #00ffcc;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
       font-weight: bold;
-      border: none;
-      border-radius: 20px;
-      background-color: #1e90ff;
-      color: white;
-      cursor: pointer;
-      box-shadow: 4px 4px 12px #000;
-      transition: background 0.3s, transform 0.2s;
+      margin-top: 10px;
     }
-
-    .button-group button:hover, .login-box button:hover {
-      background-color: #005bb5;
-      transform: scale(1.1);
+    .menu button {
+      display: block;
+      margin: 10px auto;
+      width: 80%;
     }
-
-    .hidden {
-      display: none;
-    }
-
-    /* Tombol Logout di kanan atas */
-    #logoutBtn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 30px;
-      padding: 15px 30px;
-      background-color: red;
-      color: white;
-      border: none;
+    img {
+      max-width: 100%;
       border-radius: 10px;
-      cursor: pointer;
-      display: none;
-      box-shadow: 3px 3px 10px #000;
+      margin-bottom: 20px;
     }
-
-    #logoutBtn:hover {
-      background-color: darkred;
+    #error {
+      color: red;
     }
-
   </style>
 </head>
 <body>
 
-  <h1>APK BUG BY GYZEN</h1>
-
-  <!-- Tombol Logout -->
-  <button id="logoutBtn" onclick="logout()">LOG OUT</button>
-
-  <!-- Login Form -->
-  <div class="login-box" id="loginBox">
-    <input type="text" id="username" placeholder="Username"><br>
-    <input type="password" id="password" placeholder="Password"><br>
-    <button onclick="login()">LOGIN</button>
+  <!-- LOGIN FORM -->
+  <div class="box" id="loginForm">
+    <img src="https://files.catbox.moe/76o6jg.jpg" alt="Login Banner" />
+    <h2>APK BUG BY ARTA</h2>
+    <input type="text" id="username" placeholder="Username"/>
+    <input type="password" id="password" placeholder="Password"/>
+    <button onclick="checkLogin()">Login</button>
+    <p id="error"></p>
   </div>
 
-  <!-- Main APK Bug Form -->
-  <div id="mainContent" class="hidden">
-    <input type="text" id="nomor" placeholder="Masukkan Nomor Target"><br>
-    <div class="button-group">
-      <button onclick="kirimKeBot('FORCE')">FORCE</button>
-      <button onclick="kirimKeBot('DELAY')">DELAY</button>
-      <button onclick="kirimKeBot('INVIS')">INVIS</button>
-    </div>
-    <div id="status" style="font-size: 35px; margin-top: 40px;"></div>
+  <!-- MENU UTAMA -->
+  <div class="bug menu" id="menuPage" style="display: none;">
+    <img src="https://files.catbox.moe/enwb17.jpg" alt="Menu Header" />
+    <h2>📱 Bug Menu</h2>
+    <input type="text" id="targetNumber" placeholder="Masukkan Nomor Target (628xxx)"/>
+    <button onclick="sendBug('iPhone')">💥 Bug Crash iPhone</button>
+    <button onclick="sendBug('Android')">🔥 Crash Android</button>
+    <button onclick="sendBug('For-Close')">🚀 For-Close</button>
   </div>
 
   <script>
-    function login() {
+    function checkLogin() {
       const user = document.getElementById("username").value;
       const pass = document.getElementById("password").value;
-
-      if (user === "alwaysriky" && pass === "alwaysriky") {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("mainContent").classList.remove("hidden");
-        document.getElementById("logoutBtn").style.display = "inline-block";
+      if (user === "webbug" && pass === "webbug1") {
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("menuPage").style.display = "block";
       } else {
-        alert("Login gagal! Username atau password salah.");
+        document.getElementById("error").innerText = "Username atau Password salah!";
       }
     }
 
-    function logout() {
-      document.getElementById("mainContent").classList.add("hidden");
-      document.getElementById("loginBox").style.display = "block";
-      document.getElementById("logoutBtn").style.display = "none";
-    }
-
-    function kirimKeBot(mode) {
-      const nomor = document.getElementById("nomor").value;
-      const status = document.getElementById("status");
-
-      if (!nomor) {
-        alert("Masukkan nomor terlebih dahulu!");
+    function sendBug(type) {
+      const target = document.getElementById("targetNumber").value.trim();
+      if (target === "") {
+        alert("nomor target nya mana?");
         return;
       }
-
-      // Contoh kirim data ke bot (ubah URL ke IP/server bot kamu)
-      fetch("https://your-server.com/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ nomor: nomor, mode: mode })
-      })
-      .then(res => res.text())
-      .then(res => {
-        status.innerText = "✅ Berhasil dikirim ke bot!";
-      })
-      .catch(err => {
-        status.innerText = "❌ Gagal mengirim ke bot!";
-      });
+      alert(🔺 berhasil Mengirim Bug ${type} ke ${target} ...);
     }
   </script>
 
