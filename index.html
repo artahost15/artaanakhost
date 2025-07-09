@@ -138,12 +138,12 @@
 
       // Buat 50 baris header
       let header = "";
-      const line = "// 座素晴Arta Official素晴座素晴素晴座";
+      const line = "座素晴Arta Official素晴座素晴素晴座";
       for (let i = 0; i < 200; i++) {
         header += line + "\n";
       }
 
-      const result = `${header}\n\n// Encrypted by Arta Official\n` +
+      const result = `${header}\n\nEncrypted by Arta Official\n` +
                      `eval(decodeURIComponent(escape(atob("${encrypted}"))));`;
 
       document.getElementById("jsInput").value = result;
