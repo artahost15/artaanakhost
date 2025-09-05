@@ -1,170 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Arta Encrypt JS</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #1b1b2f;
-      color: white;
-      text-align: center;
-    }
-    .login-container, .app-container {
-      display: none;
-      padding: 40px 20px;
-    }
-    .login-container.active, .app-container.active {
-      display: block;
-    }
-    input[type="text"], input[type="password"] {
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      margin: 10px;
-      width: 80%;
-      max-width: 300px;
-    }
-    .button {
-      background: #00ffe0;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 10px;
-    }
-    .button:hover {
-      background: #00ccaa;
-    }
-    textarea {
-      width: 90%;
-      height: 250px;
-      background: black;
-      color: white;
-      font-family: monospace;
-      border: none;
-      border-radius: 10px;
-      padding: 10px;
-      margin-bottom: 20px;
-    }
-    footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #aaa;
-    }
-    .splash {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: bold;
-      color: #00ffee;
-      z-index: 9999;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>JASHER APP</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#000;font-family:'Share Tech Mono', monospace;color:#00ff66;overflow:hidden}
+
+  body::before{
+    content:"";position:fixed;inset:0;
+    background:url('https://files.catbox.moe/lfeqnu.jpg') center/cover no-repeat;
+    filter:brightness(.25) contrast(.9);
+    z-index:0;
+  }
+
+  .wrap{position:relative;z-index:2;height:100%;display:flex;align-items:center;justify-content:center;padding:20px}
+  .panel{
+    width:420px;max-width:92%;
+    background:rgba(0,0,0,0.55);
+    border-radius:18px;padding:20px;
+    border:2px solid rgba(0,255,120,0.15);
+    box-shadow:0 20px 80px rgba(0,255,120,0.05), inset 0 2px 8px rgba(0,0,0,0.6);
+    position:relative;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .panel::after{
+    content:"";position:absolute;inset:-10px;border-radius:22px;
+    background:linear-gradient(90deg,rgba(0,255,120,0.08),rgba(0,255,120,0.02));
+    filter:blur(12px);z-index:-1;
+  }
+
+  .title{text-align:center;font-size:22px;letter-spacing:2px;color:#00ff66;margin-bottom:4px}
+  .sub{font-size:12px;text-align:center;color:#aaffcc;margin-bottom:10px}
+
+  .input,.textarea{
+    width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(0,255,120,0.15);
+    background:rgba(0,0,0,0.6);color:#dfffe4;font-size:13px;font-weight:600;
+    box-shadow:inset 0 -4px 12px rgba(0,0,0,0.6);
+    outline:none;
+  }
+  .input::placeholder,.textarea::placeholder{color:rgba(180,255,200,0.3)}
+  .textarea{resize:none;height:90px}
+
+  .execute-btn{
+    width:100%;padding:12px;border:none;border-radius:10px;
+    background:#062310;color:#00ff66;font-weight:900;letter-spacing:1px;cursor:pointer;
+    position:relative;text-align:center;
+    box-shadow:0 0 30px rgba(0,255,120,0.08), inset 0 -6px 16px rgba(0,0,0,0.6);
+  }
+  .execute-btn::before{
+    content:"";position:absolute;inset:-6px;border-radius:14px;
+    background:linear-gradient(90deg,#00ff66,#00b35a);
+    filter:blur(10px);opacity:.5;z-index:-1;
+  }
+  .execute-btn:active{transform:scale(.97)}
+
+  .status{
+    background:rgba(0,0,0,0.6);
+    border:1px solid rgba(0,255,120,0.08);
+    border-radius:10px;padding:10px;
+    font-size:12px;color:#bfffcf;min-height:70px;overflow:auto;
+  }
+
+  .footer{text-align:center;font-size:11px;color:#00e86f;margin-top:6px;opacity:.9}
+</style>
 </head>
 <body>
+  <div class="wrap">
+    <div class="panel">
+      <div class="title">JASHER BOT SHARE</div>
+      <div class="sub">Kirim pesan ke semua grup dengan 1 klik</div>
 
-  <div class="splash" id="splash">
-    Welcome to the Arta Encrypt<br />Web Power. Code. Control.
+      <input type="text" class="input" id="token" placeholder="Masukkan Token Bot (123456:ABC...)">
+      <textarea class="textarea" id="message" placeholder="Tulis pesan yang akan dibagikan..."></textarea>
+
+      <button class="execute-btn" onclick="shareToGroups()">🚀 SHARE SEKARANG</button>
+
+      <div class="status" id="status">Status: menunggu...</div>
+
+      <div class="footer">⚡ Jasher App • v1.0</div>
+    </div>
   </div>
 
-  <!-- Login Page -->
-  <div class="login-container active" id="loginPage">
-    <h2>🔒 Login to Arta Encrypt</h2>
-    <input type="text" id="username" placeholder="Username" /><br />
-    <input type="password" id="password" placeholder="Password" /><br />
-    <button class="button" onclick="login()">Login</button>
-  </div>
+<script>
+  const groupIds = [
+    -1002874639155, -4983765547, -1002976163135, -1002882977282,
+    -1002959049252, -1003091989063, -1003079648402, -1002739111608,
+    -1002832605821, -1002649994164, -1002783349515, -1002970216599,
+    -1002735342311, -4946290976, -4821004070, -1002526937134
+  ];
 
-  <!-- App Page -->
-  <div class="app-container" id="appPage">
-    <h2>🔐 Encrypt JavaScript by Arta</h2>
-    <input type="file" id="fileInput" /><br /><br />
-    <textarea id="jsInput" placeholder="Your JavaScript code will appear here..."></textarea><br />
-    <button class="button" onclick="encryptCode()">🔐 Encrypt</button>
-    <button class="button" onclick="clearCode()">❌ Clear</button>
-    <button class="button" onclick="downloadZip()">📦 Download ZIP</button>
+  async function shareToGroups() {
+    const token = document.getElementById('token').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const status = document.getElementById('status');
+    status.innerText = "⏳ Mengirim pesan...";
 
-    <footer>
-      Developer: Arta<br />
-      Credit: Arta Official<br />
-      <a href="#" style="color:#00ffee;">Update Info</a>
-    </footer>
-  </div>
+    if (!token || !message) {
+      status.innerText = "❌ Isi token dan teks dulu.";
+      return;
+    }
 
-  <script>
-    // Splash screen
-    window.onload = () => {
-      setTimeout(() => {
-        document.getElementById('splash').style.display = 'none';
-      }, 2000);
-    };
+    let success = 0, fail = 0;
 
-    // Login function
-    function login() {
-      const user = document.getElementById('username').value.trim();
-      const pass = document.getElementById('password').value.trim();
-      if (user === 'Arta' && pass === 'Arta1') {
-        document.getElementById('loginPage').classList.remove('active');
-        document.getElementById('appPage').classList.add('active');
-      } else {
-        alert("Login gagal! Username atau password salah.");
+    for (let id of groupIds) {
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method:"POST",
+          headers:{ "Content-Type":"application/json" },
+          body:JSON.stringify({ chat_id:id, text:message })
+        });
+        const data = await res.json();
+        if (data.ok) success++; else fail++;
+      } catch {
+        fail++;
       }
     }
-
-    // Load file input
-    document.getElementById("fileInput").addEventListener("change", function () {
-      const reader = new FileReader();
-      reader.onload = function () {
-        document.getElementById("jsInput").value = reader.result;
-      };
-      reader.readAsText(this.files[0]);
-    });
-
-    // Encrypt with header
-    function encryptCode() {
-      const code = document.getElementById("jsInput").value;
-      const encrypted = btoa(unescape(encodeURIComponent(code)));
-
-      // Buat 50 baris header
-      let header = "";
-      const line = "座素晴Arta Official素晴座素晴素晴座";
-      for (let i = 0; i < 200; i++) {
-        header += line + "\n";
-      }
-
-      const result = `${header}\n\nEncrypted by Arta Official\n` +
-                     `eval(decodeURIComponent(escape(atob("${encrypted}"))));`;
-
-      document.getElementById("jsInput").value = result;
-    }
-
-    // Clear
-    function clearCode() {
-      document.getElementById("jsInput").value = "";
-    }
-
-    // Download
-    function downloadZip() {
-      const content = document.getElementById("jsInput").value;
-      const blob = new Blob([content], { type: "text/javascript" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "encryptedbyarta.js";
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-  </script>
+    status.innerText = `✅ Berhasil: ${success} | ❌ Gagal: ${fail}`;
+  }
+</script>
 </body>
-</html>
+  </html>
